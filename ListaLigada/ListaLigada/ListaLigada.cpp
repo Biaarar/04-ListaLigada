@@ -1,7 +1,7 @@
 
 #include <iostream>
 using namespace std;
-
+//ctrl + k + ctrl + d para formatar o código
 // definicao de tipo
 struct NO {
 	int valor;
@@ -134,23 +134,71 @@ void inserirElemento()
 	}
 	else
 	{
+		if (posicaoElemento(novo->valor)) {
+			cout << "Elemento já existe na lista \n";
+			return;
+		}
 		// procura o final da lista
 		NO* aux = primeiro;
 		while (aux->prox != NULL) {
 			aux = aux->prox;
 		}
 		aux->prox = novo;
+
+
 	}
 }
 
 void excluirElemento()
 {
-	
+	{
+		int numero;
+		cout << "Digite o elemento a ser excluido: ";
+		cin >> numero;
+		NO* pos = posicaoElemento(numero);
+		if (pos != NULL) {
+			cout << "ENCONTRADO ";
+
+			if (pos == primeiro) {
+				NO* oto = primeiro;
+				primeiro = primeiro->prox;
+				free(oto); //libera a memoria ocupada pelo elemento, nesse caso o primeiro com o temp
+				cout << "Primeiro Elemento\n";
+				return;
+			}
+			NO* aux = primeiro;
+			while (aux->prox != pos) {
+				aux = aux->prox;
+			}
+
+			aux->prox = pos->prox;
+			free(pos); //libera a memoria ocupada pelo elemento
+			return;
+
+		}
+		else {
+			cout << "ELEMENTO NAO ENCONTRADO";
+		}
+
+
+	}
+
 }
 
 void buscarElemento()
 {
-	
+	int numero;
+	cout << "Digite o elemento a ser buscado: ";
+	cin >> numero;
+	NO* pos = posicaoElemento(numero);
+	if (pos != NULL) {
+		cout << "ENCONTRADO ";
+	}
+	else {
+		cout << "ELEMENTO NAO ENCONTRADO";
+	}
+
+
 }
 
 
